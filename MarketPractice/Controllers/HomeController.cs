@@ -16,6 +16,7 @@ namespace MarketPractice.Controllers
         }
         public ActionResult LogIn()
         {
+            string test;
         }
     }
 }
