@@ -1,0 +1,25 @@
+﻿@model MarketPractice.Entity.UserInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div style="text-align:center;width:100%;font-size:20px;">Register</div>
+    @using (Html.BeginForm())
+    {
+        <table>
+            <tr> <td>UserId: @Html.EditorFor(m => m.UserId)</td></tr>
+            <tr><td>UserName: @Html.EditorFor(m => m.UserName)</td></tr>
+            <tr><td><input type="submit" value="sign Up" /></td></tr>
+        </table>
+    }
+</body>
+</html>

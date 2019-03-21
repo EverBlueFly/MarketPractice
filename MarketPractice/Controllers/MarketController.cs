@@ -11,7 +11,7 @@ namespace MarketPractice.Controllers
     public class MarketController : Controller
     {
         // GET: Market
-        public ActionResult Index(List<ProductList> sp)
+        public ActionResult Index(string s = "1")
         {
             using (MarketDBEntities db = new MarketDBEntities())
             {
@@ -29,12 +29,15 @@ namespace MarketPractice.Controllers
                     
                 if (!string.IsNullOrEmpty(itemId))
                 {
-                    string sUserId = "KrisIdoit";
-                    //string sUserId = Session["UserId"].ToString();
-                    if (string.IsNullOrEmpty(sUserId))
+                        //string sUserId = "KrisIdoit";
+                        if(Session["UserId"] == null) {
+                            return RedirectToAction("Index");
+                        }
+                        string sUserId = Session["UserId"].ToString();
+                        if (string.IsNullOrEmpty(sUserId))
                     {
-                        return View("Index");
-                    }
+                            return RedirectToAction("Index");
+                        }
                     
                         var itDtl = (from pl in db.ProductList
                                      where pl.itemid == itemId
@@ -61,10 +64,7 @@ namespace MarketPractice.Controllers
                             db.SaveChanges();
                         }
                     }
-                    var ItDS = (from pl in db.ProductList
-                                select pl);
-
-                    return View("Index",ItDS.ToList());
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception)
