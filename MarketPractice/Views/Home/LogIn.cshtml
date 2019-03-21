@@ -1,22 +1,11 @@
 ﻿@model MarketPractice.Entity.UserInfo
 
-@{
-    Layout = null;
+@{ 
+    ViewBag.Title = "登入";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>LogIn</title>
-</head>
-<body>
     <div style="text-align:center;width:100%;font-size:20px;">LogIn</div>
     @using (Html.BeginForm())
     {
         <div>UserId : @Html.EditorFor(m=>m.UserId)</div>
         <div><input type="submit" value="LogIn" /></div>
     }
-</body>
-</html>

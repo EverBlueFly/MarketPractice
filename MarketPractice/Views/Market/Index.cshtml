@@ -1,24 +1,8 @@
 ﻿@model IEnumerable<MarketPractice.Entity.ProductList>
 
 @{
-    Layout = null;
+    ViewBag.Title = "購物頁";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>購物頁</title>
-</head>
-<body>
-    <div style="text-align:center;width:100%;font-size:20px;">
-        購物頁
-        @Html.ActionLink("Back to Index", "Index", "Home")  @if (Session["UserId"] == null)
-        { <span style="margin-left:10px;"> @Html.ActionLink("LogIn", "LogIn", "Home")</span>        <span style="margin-left:10px;"> @Html.ActionLink("Sign Up", "Register", "Home") </span>}
-        else
-        {@Html.ActionLink("LogOut", "LogOut", "Home") }
-    </div>
     
     @using (Html.BeginForm())
     {
@@ -48,5 +32,3 @@
             }
         </table>
     }
-</body>
-</html>

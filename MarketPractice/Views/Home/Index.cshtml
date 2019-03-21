@@ -1,26 +1,7 @@
-﻿
-@{
-    Layout = null;
+﻿@{ 
+    ViewBag.Title = "首頁";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>首頁</title>
-</head>
-<body>
-    <div style="color:red;">
-        @ViewBag.ErrMsg
-    </div>
-    <div style="text-align:center;width:100%;font-size:20px;padding-left:5px;">
-        首頁  <br />
-        @Html.ActionLink("Go to Market", "Index", "Market") @if (Session["UserId"] == null)
-        { <span style="margin-left:10px;"> @Html.ActionLink("LogIn", "LogIn")</span>        <span style="margin-left:10px;"> @Html.ActionLink("Sign Up", "Register") </span>}
-        else
-        {@Html.ActionLink("LogOut", "LogOut") }
-
-    </div>
-</body>
-</html>
+<div style="width:100%;text-align:center;font-size:25px;">
+    Welcome
+</div>
