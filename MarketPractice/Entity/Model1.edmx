@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MarketDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ProductList">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="itemName" Type="varchar" MaxLength="50" />
+          <Property Name="total_amount" Type="int" />
+          <Property Name="left_amount" Type="int" />
+          <Property Name="imgUrl" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="itemId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="MarketDBModelStoreContainer">
+          <EntitySet Name="ProductList" EntityType="Self.ProductList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShoppingList" EntityType="Self.ShoppingList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MarketDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ProductList">
+          <Key>
+            <PropertyRef Name="itemid" />
+          </Key>
+          <Property Name="itemid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="itemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="total_amount" Type="Int32" />
+          <Property Name="left_amount" Type="Int32" />
+          <Property Name="imgUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ShoppingList">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="itemId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="amount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="MarketDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ProductList" EntityType="Self.ProductList" />
+          <EntitySet Name="ShoppingList" EntityType="Self.ShoppingList" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MarketDBModelStoreContainer" CdmEntityContainer="MarketDBEntities">
+          <EntitySetMapping Name="ProductList">
+            <EntityTypeMapping TypeName="MarketDBModel.ProductList">
+              <MappingFragment StoreEntitySet="ProductList">
+                <ScalarProperty Name="itemid" ColumnName="itemid" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="total_amount" ColumnName="total_amount" />
+                <ScalarProperty Name="left_amount" ColumnName="left_amount" />
+                <ScalarProperty Name="imgUrl" ColumnName="imgUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShoppingList">
+            <EntityTypeMapping TypeName="MarketDBModel.ShoppingList">
+              <MappingFragment StoreEntitySet="ShoppingList">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="MarketDBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

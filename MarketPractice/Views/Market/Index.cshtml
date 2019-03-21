@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MarketPractice.Entity.ProductList>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>購物頁</title>
+</head>
+<body>
+    <div style="text-align:center;width:100%;font-size:20px;">
+        購物頁
+    </div>
+    @Html.ActionLink("Back to Index", "Index", "Home")
+    @using (Html.BeginForm())
+    {
+        <table>
+            <tr>
+                <td>圖片</td>
+                <td>商品名稱</td>
+                <td>剩餘數量</td>
+                <td>動作</td>
+            </tr>
+            @foreach (MarketPractice.Entity.ProductList it in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => it.imgUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => it.itemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => it.left_amount) / @Html.DisplayFor(m => it.total_amount)
+                    </td>
+                    <td>
+                        @Html.ActionLink("加入購物車", "AddCart",new { itemId = it.itemid})
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</body>
+</html>
