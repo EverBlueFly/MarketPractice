@@ -15,7 +15,8 @@
     <div style="text-align:center;width:100%;font-size:20px;">
         購物頁
     </div>
-    @Html.ActionLink("Back to Index", "Index", "Home")
+    @Html.ActionLink("Back to Index", "Index", "Home")  @if(Session["UserId"] == null) { @Html.ActionLink("LogIn", "LogIn", "Home")}
+    else {@Html.ActionLink("LogOut", "LogOut", "Home") }
     @using (Html.BeginForm())
     {
         <table>

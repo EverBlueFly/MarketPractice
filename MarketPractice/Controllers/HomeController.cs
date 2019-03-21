@@ -11,7 +11,11 @@ namespace MarketPractice.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            string sTest;
             return View();
+        }
+        public ActionResult LogIn()
+        {
         }
     }
 }
