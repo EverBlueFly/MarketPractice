@@ -13,43 +13,51 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <style type="text/css">
+        .background{
+            background-color: rgba(0, 255, 255,0.2);
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-    <div class="nav navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div>
-                <a class="navbar-brand" href="#">@ViewBag.Title</a>
-            </div>
-            <ul class="nav nav-tabs navbar-right" style="border:none;">
-                <li>@Html.ActionLink("Index", "Index", "Home")</li>
-                <li>@Html.ActionLink("Market", "Index", "Market")</li>
-                @if (Session["UserId"] == null)
-                {
-                    <li>@Html.ActionLink("LogIn", "LogIn", "Home")</li>
-                    <li>@Html.ActionLink("Sign Up", "Register", "Home")</li>
-                }
-                else
-                {
-                    string userName = ViewBag.UserName;
-                    <li>@Html.ActionLink("LogOut", "LogOut", "Home")</li>
-                    <li>@Html.ActionLink("My Shopping Cart", "ShoppingCart", "Home")</li>
-                    <li>@Html.Label(userName)</li>
-                }
-            </ul>
-        </div>
-    </div>
-        @*<div class="nav navbar-default navbar-fixed-top">
+    <div class="background">
+        <div class="nav navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div>
-                    <a class="navbar-brand" href="#">brand</a>
+                    <a class="navbar-brand" href="#">@ViewBag.Title</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li><a data-toggle="tab" href="#home">home</a></li>
-                    <li><a data-toggle="tab" href="#menu1">page 1</a></li>
-                    <li><a data-toggle="tab" href="#menu2">page 2</a></li>
+                <ul class="nav nav-tabs navbar-right" style="border:none;">
+                    <li>@Html.ActionLink("Index", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Market", "Index", "Market")</li>
+                    @if (Session["UserId"] == null)
+                    {
+                        <li>@Html.ActionLink("LogIn", "LogIn", "Home")</li>
+                        <li>@Html.ActionLink("Sign Up", "Register", "Home")</li>
+                    }
+                    else
+                    {
+                        string userName = ViewBag.UserName;
+                        <li>@Html.ActionLink("LogOut", "LogOut", "Home")</li>
+                        <li>@Html.ActionLink("My Shopping Cart", "ShoppingCart", "Home")</li>
+                        <li>@Html.Label(userName)</li>
+                    }
                 </ul>
             </div>
-        </div>*@
+        </div>
+        @*<div class="nav navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div>
+                        <a class="navbar-brand" href="#">brand</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li><a data-toggle="tab" href="#home">home</a></li>
+                        <li><a data-toggle="tab" href="#menu1">page 1</a></li>
+                        <li><a data-toggle="tab" href="#menu2">page 2</a></li>
+                    </ul>
+                </div>
+            </div>*@
         <div class="container body-content">
             <br />
             @RenderBody()
@@ -58,7 +66,7 @@
                     <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
                 </footer>*@
         </div>
-
+    </div>
         <script src="~/Scripts/jquery_3.0.0.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
