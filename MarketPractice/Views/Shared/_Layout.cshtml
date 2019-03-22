@@ -1,39 +1,65 @@
 ﻿<!DOCTYPE html>
+@{ 
+    if(Session["UserName"] != null)
+    {
+        ViewBag.UserName = Session["UserName"].ToString();
+    }
+}
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                @ViewBag.Title <br />
-                @Html.ActionLink("Index", "Index", "Home") @Html.ActionLink("Market", "Index", "Market") @if (Session["UserId"] == null)
-                { <span style="margin-left:10px;"> @Html.ActionLink("LogIn", "LogIn","Home")</span>        <span style="margin-left:10px;"> @Html.ActionLink("Sign Up", "Register","Home") </span>}
+    <div class="nav navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div>
+                <a class="navbar-brand" href="#">@ViewBag.Title</a>
+            </div>
+            <ul class="nav nav-tabs navbar-right" style="border:none;">
+                <li>@Html.ActionLink("Index", "Index", "Home")</li>
+                <li>@Html.ActionLink("Market", "Index", "Market")</li>
+                @if (Session["UserId"] == null)
+                {
+                    <li>@Html.ActionLink("LogIn", "LogIn", "Home")</li>
+                    <li>@Html.ActionLink("Sign Up", "Register", "Home")</li>
+                }
                 else
-                {@Html.ActionLink("LogOut", "LogOut","Home") }
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+                {
+                    string userName = ViewBag.UserName;
+                    <li>@Html.ActionLink("LogOut", "LogOut", "Home")</li>
+                    <li>@Html.ActionLink("My Shopping Cart", "ShoppingCart", "Home")</li>
+                    <li>@Html.Label(userName)</li>
+                }
+            </ul>
         </div>
     </div>
+        @*<div class="nav navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div>
+                    <a class="navbar-brand" href="#">brand</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a data-toggle="tab" href="#home">home</a></li>
+                    <li><a data-toggle="tab" href="#menu1">page 1</a></li>
+                    <li><a data-toggle="tab" href="#menu2">page 2</a></li>
+                </ul>
+            </div>
+        </div>*@
+        <div class="container body-content">
+            <br />
+            @RenderBody()
+            @*<hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>*@
+        </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        @*<hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
-    </div>
-
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery_3.0.0.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

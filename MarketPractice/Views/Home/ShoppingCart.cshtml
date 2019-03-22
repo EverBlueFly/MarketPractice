@@ -1,0 +1,44 @@
+﻿@model List<MarketPractice.ViewModels.ShoppingCartViewModel>
+@{ 
+    ViewBag.Title = "選購的商品";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShoppingCart</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm())
+        {
+            <table class="table table-bordered" style="border-color:black;">
+                <tr>
+                    <td scope="col">圖片</td>
+                    <td scope="col">商品名稱</td>
+                    <td scope="col">數量</td>
+                    <td scope="col">動作</td>
+                </tr>
+                @foreach (MarketPractice.ViewModels.ShoppingCartViewModel it in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src=@(Url.Content(it.imgUrl)) height="100" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => it.itemName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => it.amount)
+                        </td>
+                        <td>
+                            @Html.ActionLink("刪除商品", "DeleteFromCart", new { itemId = it.itemId })
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</body>
+</html>

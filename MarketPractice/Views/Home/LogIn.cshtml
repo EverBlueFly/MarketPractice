@@ -3,9 +3,8 @@
 @{ 
     ViewBag.Title = "登入";
 }
-    <div style="text-align:center;width:100%;font-size:20px;">LogIn</div>
     @using (Html.BeginForm())
     {
-        <div>UserId : @Html.EditorFor(m=>m.UserId)</div>
-        <div><input type="submit" value="LogIn" /></div>
+        <div style="display:inline-block">UserId : @Html.EditorFor(m=>m.UserId)
+        <input type="submit" value="LogIn" class="btn" /></div>
     }

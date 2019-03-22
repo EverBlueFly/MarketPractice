@@ -3,21 +3,21 @@
 @{
     ViewBag.Title = "購物頁";
 }
-    
+
     @using (Html.BeginForm())
     {
-        <table>
+        <table class="table table-bordered" style="border-color:black;">
             <tr>
-                <td>圖片</td>
-                <td>商品名稱</td>
-                <td>剩餘數量</td>
-                <td>動作</td>
+                <td scope="col">圖片</td>
+                <td scope="col">商品名稱</td>
+                <td scope="col">剩餘數量</td>
+                <td scope="col">動作</td>
             </tr>
             @foreach (MarketPractice.Entity.ProductList it in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(m => it.imgUrl)
+                        <img src=@(Url.Content(it.imgUrl)) height="100" />
                     </td>
                     <td>
                         @Html.DisplayFor(m => it.itemName)
@@ -32,3 +32,4 @@
             }
         </table>
     }
+

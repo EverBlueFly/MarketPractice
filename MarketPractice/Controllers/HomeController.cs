@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using MarketPractice.Entity;
+using MarketPractice.ViewModels;
 
 namespace MarketPractice.Controllers
 {
@@ -34,7 +35,8 @@ namespace MarketPractice.Controllers
                     {
                         return View();
                     }
-                    Session["UserId"] = userit.UserId;
+                    Session["UserId"] = UserDs.UserId;
+                    Session["UserName"] = UserDs.UserName;
                 }
             }
             else
@@ -72,6 +74,7 @@ namespace MarketPractice.Controllers
                         db.UserInfo.Add(InsUserInfo);
                         db.SaveChanges();
                         Session["UserId"] = userit.UserId;
+                        Session["UserName"] = userit.UserName;
                     }
 
                 }
@@ -86,7 +89,61 @@ namespace MarketPractice.Controllers
         public ActionResult LogOut()
         {
             Session.Remove("UserId");
+            Session.Remove("UserName");
             return RedirectToAction("Index");
         }
+        public ActionResult ShoppingCart()
+        {
+            if(Session["UserId"] != null)
+            {
+                string sUserId = Session["UserId"].ToString();
+                using(MarketDBEntities db = new MarketDBEntities())
+                {
+                    var itDS = (from sl in db.ShoppingList
+                                join pl in db.ProductList on sl.itemId equals pl.itemid
+                                where sl.UserId == sUserId
+                                select new ShoppingCartViewModel {
+                                    itemId = sl.itemId,
+                                    itemName = pl.itemName,
+                                    amount = sl.amount,
+                                    imgUrl = pl.imgUrl
+                                }).ToList();
+                    return View(itDS);
+                }
+            }
+            return RedirectToAction("Index","Home");
+        }
+        public ActionResult DeleteFromCart(string itemId)
+        {
+            if(Session["UserId"] != null && !string.IsNullOrEmpty(itemId))
+            {
+                string sUserId = Session["UserId"].ToString();
+                using (MarketDBEntities db = new MarketDBEntities())
+                {
+                    var SPDS = (from sp in db.ShoppingList
+                                where sp.itemId == itemId &&
+                                sp.UserId == sUserId
+                                select sp).FirstOrDefault();
+                    if(SPDS != null)
+                    {
+                        var PDDS = (from pl in db.ProductList
+                                    where pl.itemid == itemId
+                                    select pl).FirstOrDefault();
+                        if(PDDS != null)
+                        {
+                            PDDS.left_amount = PDDS.left_amount + SPDS.amount;
+                        }
+                        db.ShoppingList.Remove(SPDS);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return RedirectToAction("ShoppingCart");
+        }
+        //public ActionResult GetPic(string sFileName)
+        //{
+        //    string sPath = Server.MapPath(".");
+        //    return File(sPath + "/imgs/" + sFileName, "image/jpeg");
+        //}
     }
 }
