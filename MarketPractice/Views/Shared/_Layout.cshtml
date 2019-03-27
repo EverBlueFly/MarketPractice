@@ -13,6 +13,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <style type="text/css">
         .background{
             background-color: rgba(0, 255, 255,0.2);
@@ -20,6 +21,13 @@
             height: 100vh;
         }
     </style>
+    @if (TempData["ErrMsg"] != null)
+    {
+        <script>
+        var msg = @Html.Raw(Json.Encode(TempData["ErrMsg"]));
+        alert(msg);
+        </script>
+    }
 </head>
 <body>
     <div class="background">
@@ -67,7 +75,6 @@
                 </footer>*@
         </div>
     </div>
-        <script src="~/Scripts/jquery_3.0.0.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

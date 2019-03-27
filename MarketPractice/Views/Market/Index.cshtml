@@ -3,7 +3,32 @@
 @{
     ViewBag.Title = "購物頁";
 }
-
+<script type="text/javascript">
+            //$(document).ready(function () {
+            //    $("#btnAdd").click(function () {
+            //        alert('click!');
+            //    }
+            //    );
+            //});
+            $(document).ready(function () {
+                $("[name=btn]").click(function (e) {
+                    var btnid = e.target.id;
+                    alert(btnid);
+                    var idCont = btnid.replace('btn', '');
+                    var lbId = "#lb" + idCont;
+                    var lbAmtId = "#lbAmt" + idCont;
+                    //var ccc = document.getElementById(lbId).innerHTML;
+                    var ccc = $(lbId).html();
+                    $(lbAmtId).html(parseInt($(lbAmtId).html()) - 1);
+                    alert(lbId);
+                    alert(ccc);
+                });
+            });
+            //var btn = document.getElementById('btnAdd');
+            //btn.addEventListener('click', function () {
+            //    alert('hi');
+            //})
+</script>
     @using (Html.BeginForm())
     {
         <table class="table table-bordered" style="border-color:black;">
@@ -15,21 +40,29 @@
             </tr>
             @foreach (MarketPractice.Entity.ProductList it in Model)
             {
+                string sLbId = "lb" + it.itemid;
                 <tr>
                     <td>
                         <img src=@(Url.Content(it.imgUrl)) height="100" />
                     </td>
                     <td>
-                        @Html.DisplayFor(m => it.itemName)
+                        @*@Html.DisplayFor(m => it.itemName, new { id = sLbId })*@
+                        @Html.Label(it.itemName,new {@id = sLbId })
                     </td>
                     <td>
-                        @Html.DisplayFor(m => it.left_amount) / @Html.DisplayFor(m => it.total_amount)
+                        @Html.Label(it.left_amount.ToString() ,new {@id= "lbAmt" + it.itemid }) / @Html.DisplayFor(m => it.total_amount)
                     </td>
                     <td>
-                        @Html.ActionLink("加入購物車", "AddCart",new { itemId = it.itemid})
+                        @if (it.left_amount != 0)
+                        {
+                            string sId = "btn" + it.itemid;
+                            @Html.ActionLink("加入購物車", "AddCart", new { itemId = it.itemid })
+                            <input type="button" value="加入購物車" id=@sId name="btn" />
+                        }
                     </td>
                 </tr>
             }
         </table>
+
     }
 
